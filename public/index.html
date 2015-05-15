@@ -1,11 +1,68 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Untitled Document</title>
-    </head>
-    
-    <body>
-    test
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>WordStair</title>
+</head>
+
+<style>
+	*{
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		box-sizing:border-box;
+	}
+	html{
+		font-size: 10px;
+	}
+	body,html{
+		height: 100%;
+		width: 100%;
+		background-color: rgb(165, 222, 228);
+	}
+	body{
+		display: flex;
+		flex-direction:column;
+	}
+	.h1{
+		text-align: center;
+		line-height: 2;
+		font-size: 3.6rem;
+		color: white;
+		flex-grow:1;
+	}
+	.word{
+		flex-grow:4;
+		font-size: 5rem;
+	}
+	.action{
+		display: flex;
+		flex-direction:column;
+		flex-grow:2;
+		min-height: 120px;
+	}
+	.action__item{
+	 	flex: 1 1 auto;
+	 	min-height: 44px;
+	 	font-size: 2rem;
+	 	background: rgb(245, 150, 170);
+	 	border: none;
+	 	border-bottom: 1px solid white;
+	 	color: white;
+	}
+</style>
+<body>
+	<h1 class="h1">WordStair</h1>
+		<div class="word">loading...</div>
+		<div class="action">
+			<button class="action__item action__disapear">Show no more</button>
+			<button class="action__item action__remember">Remember</button>
+			<button class="action__item action__forget">Forget</button>
+		</div>
+	<script type="text/javascript" src='js/jquery.min.js'></script>
+	<script type="text/javascript" src='js/main.js'>
+	
+	</script>
+</body>
 </html>

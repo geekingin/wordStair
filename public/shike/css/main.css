@@ -1,0 +1,336 @@
+body{
+	background: url('../img/background.png') 50% 50% no-repeat;
+	background-size: cover;
+	max-width: 400px;
+	margin:0 auto;
+}
+.header{
+	background-color: rgba(255,243,218,0.73);
+	width: 100%;
+	height: 144px;
+	box-shadow:2px 2px 5px rgba(1,1,1,0.15);
+}
+.title{
+	width: 100%;
+	height: 32px;
+	line-height: 32px;
+	border-bottom: 2px solid rgba(240,136,80,0.8);
+	font-size: 18px;
+	text-align: center;
+	color: rgba(122,122,122,0.7);
+	font-weight: 100;
+}
+.profile-photo{
+	text-align: center;
+	margin: 0 auto;
+}
+.profile-photo img{
+	margin-top: 8px;
+	height: 64px;
+	width: 64px;
+	border-radius: 50%;
+	border: 2px solid rgba(106,65,43,0.15);
+}
+.profile-name{
+	text-align: center;
+	font-size: 16px;
+	color: #888;
+}
+.profile-count{
+	margin: 0 auto;
+	text-align: center;
+	font-size: 12px;
+	color: #999;
+}
+
+.container{
+	width: 100%;
+}
+.card{
+	width: 96%;
+	margin: 8px auto;
+	box-shadow: 2px 2px 4px rgba(1,1,1,0.15);
+}
+.card-photo-wrapper{
+	overflow: hidden;
+	position: relative;
+	box-sizing:content-box;
+	padding-bottom: 50%;
+}
+.card-photo{
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	-webkit-transform:translateY(-50%);
+}
+
+.card-date{
+	position: absolute;
+	float: left;
+	width: 100px;
+	bottom: 0;
+	left: 8px;		
+	font-family: Bebas;
+	font-weight: 100;
+	text-shadow:2px 2px 5px rgba(1,1,1,0.25);
+}
+.card-day{
+	float: left;
+	font-size: 43px;
+	color: rgba(255,255,255,0.9);
+}
+.card-month{
+	float: left;
+	margin-top: 10px;
+	font-size: 16px;
+	color: rgba(255,255,255,0.8);
+}
+.card-weekday{
+	float: left;
+	font-size: 16px;
+	color: rgba(255,255,255,0.8);
+}
+
+.card-info{
+	background-color: #f4f4e0;
+	position: relative;
+	padding: 8px;
+}
+.card-info:before{
+	content: '';
+	height: 0;
+	width: 0;
+	border: 6px solid;
+	border-color: transparent transparent #f4f4e0 transparent;
+	display: inline-block;
+	position: absolute;
+	top: -12px;
+	left: 9px;
+}
+.card-place-name{
+	font-size: 14px;
+	color: #999;
+	font-weight: 100;
+}
+.card-place-name:before{
+	content: '';
+	background: url(../img/logo-mini-01.png) no-repeat 50% 50%;
+	background-size: contain;
+	height: 14px;
+	width: 14px;
+	display: inline-block;
+	vertical-align: text-bottom;
+}
+.card-place-name span{
+	margin-left: 8px;
+	padding: 1px;
+	font-size: 12px;
+	background-color: #ef884e;
+	border-radius: 2px;
+	color: white;
+}
+.card-place-name .card-counting-number{
+	margin-left: 0;
+}
+
+
+
+
+
+
+
+
+
+.record-card{
+	overflow: hidden;
+	position: relative;
+}
+.record-card .card-date{
+	float: left;
+	position: absolute;
+	margin-top: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 20%;
+	height: 100%;
+	background-color: rgba(106,65,43,0.7);
+	line-height: 1.2;
+}
+
+.record-card .card-day, .record-card .card-month, .record-card .card-weekday{
+	float: none;
+	text-align: center;
+	margin-top: 0;
+}
+.record-card .card-weekday{
+	position: absolute;
+	width: 100%;
+	bottom: 4px;
+}
+
+.records-container{
+	float: left;
+	width: 80%;
+	min-height:96px;
+	margin-left: 20%;
+	background-color: rgba(244,244,224,0.8);
+}
+.records-container:before{
+	content: '';
+	display: inline-block;
+	position: absolute;
+	height: 0;
+	width: 0;
+	border: 8px solid black;
+	border-color: transparent rgba(244,244,224,0.9) transparent transparent;
+	top: 18px;
+	left: 16%;
+}
+.records-container .record-photo{
+	float: right;
+	margin:0px 12px 0 0;
+	height: 40px;
+	width: 40px;
+}
+
+.record-wrapper{
+	margin: 16px 0;
+}
+.record-place-name{
+	padding-left: 40px;
+	font-size: 16px;
+	color: #999;
+	position: relative;
+}
+
+.record-place-name:before{
+	content: "";
+	display: inline-block;
+	position: absolute;
+	left: 12px;
+	top: 2px;
+	height: 18px;
+	width: 18px;
+	background: url(../img/logo-mini-01.png) no-repeat 50% 50%;
+	background-size: contain;
+}
+.record-info{
+	padding-left: 40px;
+	font-size: 12px;
+	color: #999;
+}
+
+.record-first-time:after{
+	content: "第一次签到";
+	display: inline-block;
+	margin-left: 4px;
+	padding: 0 2px;
+	line-height: 1.2;
+	border-radius: 2px;
+	background-color: #ef884e;
+	color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.keeper-card{
+	height: 100px;
+	background-color: rgba(244,244,224,0.8);
+}
+
+.keeper-cover{
+	float: left;
+	height: 100%;
+	width: 30%;
+	overflow: hidden;
+	background: url(../img/canteen.png) no-repeat 50% 50%;
+	background-size: cover;
+	text-align: center;
+	padding-top: 5%;
+}
+
+.keeper-content{
+	padding-top: 24px;
+	position: relative;
+}
+.keeper-content:before{
+	content: "";
+	height: 0;
+	width: 0;
+	/*background-color: rgba(244,244,224,0.8);*/
+	border:10px solid rgba(244,244,224,0.95);
+	border-color:transparent rgba(244,244,224,0.95) transparent transparent; 
+	position: absolute;
+	left: 95px;
+}
+.keeper-info{
+	width: 80%;
+	margin:0 auto;
+	padding: 4px 0;
+	border-top: 2px solid white;
+	border-bottom: 2px solid white;
+	background-color: rgba(1,1,1,0.15);
+}
+.keeper-info h2{
+	color: white;
+	font-size: 18px;
+	font-family: "";
+	vertical-align: sub;
+	line-height: 1;
+}
+.keeper-info h2 span{
+	font-size: 30px;
+	font-family:"Bebas"; 
+}
+
+.keeper-shop-content{
+	float: left;
+	position: relative;
+	width: 70%;
+	height: 100%;
+	background-color: rgba(244,244,224,0.8);
+	padding-top: 24px;
+}
+.keeper-shop-content:before{
+	content: "";
+	height: 0;
+	width: 0;
+	border: 8px solid red;
+	border-color: transparent rgba(244,244,224,0.9) transparent transparent;
+	position: absolute;
+	left: -16px;
+	top: 40px;
+}
+
+
+.keeper-title,.keeper-shop-name{
+	color: #888;
+	font-size: 16px;
+}
+
+
+.keeper-shop-name:before{
+	background: url(../img/logo-mini-01.png) no-repeat 50% 50%;
+}
+.keeper-title:before{
+	background: url(../img/icon-crown.png) no-repeat 50% 50%;
+}
+
+.keeper-title:before,.keeper-shop-name:before{
+	content: "";
+	display: inline-block;
+	height: 16px;
+	width: 16px;
+	background-size: contain;
+	padding-right: 32px;
+}
