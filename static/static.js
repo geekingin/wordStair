@@ -10,7 +10,9 @@ var config = require('./config');
 module.exports=function resStatic(pathname, req, res) {
 	var realPath = path.join('public', pathname);
 	fs.stat(realPath, function(err, stats) {
+		// console.log(realPath,stats);
 		if (err) {
+			console.log(err);
 			res.writeHead(404, 'Not Found', {
 				'Content-Type': 'text/html'
 			});
@@ -18,8 +20,9 @@ module.exports=function resStatic(pathname, req, res) {
 			return;
 		}
 		if (stats.isDirectory()) {
-			realPath = path.join('public/', config.welcome.file);
-			// console.log(realPath);
+			realPath = path.join(pathname,config.welcome.file);
+			resStatic(realPath,req,res);								//这一句一定要有，不然地址改变了，但是stat没有改变，会造成所引用的stat一直是改变地址之前的文件/文件夹的stat
+			return ;
 		}
 		var ext = path.extname(realPath);
 		ext = ext ? ext.slice(1) : 'unknown';
@@ -30,11 +33,12 @@ module.exports=function resStatic(pathname, req, res) {
 			res.setHeader('Expires', expires.toString());
 			res.setHeader('Cache-Control', 'max-age=' + config.Expires.maxAge);
 		}
-		stats.mtime.setHours(stats.mtime.getHours()+8);
+		// console.log(realPath,stats.mtime);
+		// stats.mtime.setHours(stats.mtime.getHours()+8);
 		var lastModified = stats.mtime.toUTCString();
 		res.setHeader('Last-Modified', lastModified);
-		console.log(lastModified);
-		console.log(stats);
+		// console.log(stats,lastModified);
+		// console.log(stats);
 		// console.log(req.headers['if-modified-since']);
 		if (req.headers['if-modified-since'] && lastModified == req.headers['if-modified-since']) {
 			res.writeHead(304, 'Not Modified');

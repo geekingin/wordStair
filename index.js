@@ -9,6 +9,8 @@ var resStatic = require('./static/static.js');
 // var mime = require('./mime').types;
 // var config = require('./config');
 
+
+
 http.createServer(function(req, res) {
 	var reqUrl = url.parse(req.url);
 	switch (reqUrl.pathname) {

@@ -15,5 +15,6 @@ gulp.task('prefix',function(){
 });
 
 gulp.task('default',function(){
-	gulp.watch('./public/*',['prefix']);
+	gulp.watch('public/less/*',['prefix']);
+	console.log('fd');
 })
