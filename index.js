@@ -34,7 +34,7 @@ http.createServer(function(req, res) {
 			resStatic(reqUrl.pathname, req, res);
 	}
 	// res.end(JSON.stringify(url1) + '/n');	
-}).listen(3000);
+}).listen(3001);
 
 
 
