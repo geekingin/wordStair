@@ -7,13 +7,17 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+	<form action="/api/words/add" method="post" enctype="multipart/form-data">
+		<input type="file" name="file">
+		<input type="submit">
+	</form>
 	<h1 class="h1">WordSftair</h1>
 		<div class="word">loading...</div>
 		<div class="action">
 			<button class="action__item action__disapear">Show no more</button>
 			<button class="action__item action__remember">Remember</button>
 			<button class="action__item action__forget">Forget</button>
-		</div>f
+		</div>
 	<script type="text/javascript" src='js/jquery.min.js'></script>
 	<script type="text/javascript" src='js/main.js'></script>
 </body>

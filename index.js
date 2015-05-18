@@ -2,13 +2,11 @@ var fs = require('fs');
 var http = require('http');
 var url = require('url');
 var path = require('path');
-var zlib = require('zlib');
+var formidable=require('formidable');
 var querystring = require('querystring');
 var resStatic = require('./static/static.js');
-// var resIndex=require('./route/index');
-// var mime = require('./mime').types;
-// var config = require('./config');
 
+var db='db.json';
 
 
 http.createServer(function(req, res) {
@@ -19,6 +17,9 @@ http.createServer(function(req, res) {
 			break;
 		case '/api/words/all':
 			resAllWords(req, res);
+			break;
+		case '/api/words/add':
+			resAddWords(req,res);
 			break;
 		case '/api/word/disapear':
 			disapearWord(req, res);
@@ -37,10 +38,7 @@ http.createServer(function(req, res) {
 
 
 
-var wordReg = /[A-Za-z]+/g;
-var db = 'db.json';
 var script = 'word.srt';
-
 
 function resAllWords(req, res) {
 	fs.stat(db, function(err, stats) {
@@ -66,7 +64,11 @@ function resAllWords(req, res) {
 					body.length++;
 				}
 			}
+			words.sort(function(a,b){
+				return b.value-a.value;
+			})
 			body.words = words;
+
 			res.writeHead(200, 'Ok', {
 				'Content-Type': 'application/json'
 			});
@@ -74,7 +76,57 @@ function resAllWords(req, res) {
 		})
 	})
 }
+function resAddWords(req,res){
+	var form=new formidable.IncomingForm();
+	form.on('file',function(name,file){
+		generateWords(file.path);
+	});
+	form.on('end',function(){
+		res.setHeader('Content-Type','text/plain');
+		res.write('upload complete');
+		res.end('util.inspect(files)');
+	})
+	form.parse(req);	
+}	
+function isFormData(req){
+	var type=req.headers['content-type']||'';
+	return 0==type.indexOf('multipart/form-data');	
+}
+function generateWords(path) {
+	var wordReg = /[A-Za-z]+/g;
+	var db = 'db.json';
 
+	fs.readFile(path, function(err, data) {
+		var text = data.toString().toLowerCase();
+		var wordsRow = text.match(wordReg);
+
+		fs.exists(db, function(exists) {
+			if (exists) {
+				fs.readFile(db, function(err, data) {
+					if (err) throw err;
+					var wordsDb = JSON.parse(data.toString() || '{}');
+					saveWords(wordsRow, wordsDb,db);
+				});
+			} else {
+				saveWords(wordsRow, {
+				},db);
+			}
+		});
+	});
+}
+
+function saveWords(wordsRow, wordsDb,db) {
+	wordsRow.forEach(function(e, i) {
+		if (!wordsDb[e]) {
+			wordsDb[e] = 10;
+			// wordsDb._length += 1;
+		}
+	});
+	fs.writeFile(db, JSON.stringify(wordsDb), 'utf8', function(err) {
+		console.timeEnd(1);
+		if (err) throw err;
+	})
+}
 function disapearWord(req, res) {
 	var query = '';
 	req.on('data', function(chunk) {
@@ -184,34 +236,7 @@ function forgetWord(req, res) {
 // resAllWords();
 console.time(1);
 
-function getWords() {
-	fs.readFile(script, function(err, data) {
-		var text = data.toString().toLowerCase();
-		var wordsRow = text.match(wordReg);
 
-		fs.exists(db, function(exists) {
-			if (exists) {
-				fs.readFile(db, function(err, data) {
-					if (err) throw err;
-
-					var wordsDb = JSON.parse(data.toString() || '{}');
-					// console.log(wordsDb);
-					// if (!wordsDb._length) wordsDb._length = 0;
-
-					saveWords(wordsRow, wordsDb);
-
-				});
-			} else {
-
-				saveWords(wordsRow, {
-					_length: 0
-				});
-
-			}
-
-		});
-	});
-}
 
 // setTimeout(function() {
 // 	reduceWordValue('gett')
@@ -231,18 +256,5 @@ function reduceWordValue(word) {
 
 
 
-function saveWords(wordsRow, wordsDb) {
-	wordsRow.forEach(function(e, i) {
-		if (!wordsDb[e]) {
-			wordsDb[e] = 10;
-			wordsDb._length += 1;
-		}
-	});
-	// console.log(wordsDb,wordsRow);
-	fs.writeFile(db, JSON.stringify(wordsDb), 'utf8', function(err) {
-		console.timeEnd(1);
-		if (err) throw err;
-	})
-}
 
 // console.log('saved');

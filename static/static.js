@@ -33,18 +33,14 @@ module.exports=function resStatic(pathname, req, res) {
 			res.setHeader('Expires', expires.toString());
 			res.setHeader('Cache-Control', 'max-age=' + config.Expires.maxAge);
 		}
-		// console.log(realPath,stats.mtime);
-		// stats.mtime.setHours(stats.mtime.getHours()+8);
+
 		var lastModified = stats.mtime.toUTCString();
 		res.setHeader('Last-Modified', lastModified);
-		// console.log(stats,lastModified);
-		// console.log(stats);
-		// console.log(req.headers['if-modified-since']);
+
 		if (req.headers['if-modified-since'] && lastModified == req.headers['if-modified-since']) {
 			res.writeHead(304, 'Not Modified');
 			res.end();
 		} else {
-
 			var raw = fs.createReadStream(realPath);
 			var acceptEncoding = req.headers['accept-encoding'] || '';
 			var matched = ext.match(config.compress.match);
