@@ -6,7 +6,7 @@ $(function() {
 		console.log(data.words);
 		words=data.words;
 		// $('.word').text(data.words.shift().word);
-		showNextWord(wordIndexNow);
+		showNextWord();
 	});
 
 
@@ -16,7 +16,7 @@ $(function() {
 		$.post('api/word/disapear', {
 			word: word
 		}, function(data, textStatus, xhr) {
-			showNextWord(wordIndexNow);
+			showNextWord();
 			// console.log('fd');
 		});
 	});
@@ -28,7 +28,7 @@ $(function() {
 		$.post('api/word/remember', {
 			word: word
 		}, function(data, textStatus, xhr) {
-			showNextWord(wordIndexNow);
+			showNextWord();
 
 		});
 	});
@@ -39,15 +39,15 @@ $(function() {
 		$.post('api/word/forget', {
 			word: word
 		}, function(data, textStatus, xhr) {
-			showNextWord(wordIndexNow);
+			showNextWord();
 		});
 	});
 	$('.action__skip').on('click',function(e){
 		event.preventDefault();
-		showNextWord(wordIndexNow);
+		showNextWord();
 	});
 
-	function showNextWord(wordIndexNow){
+	function showNextWord(){
 		$('.word').text(words[wordIndexNow++].word);
 	}
 });
