@@ -1,11 +1,12 @@
 $(function() {
 	var words=[];
+	var wordIndexNow=0;
 	$.get('api/words/all', function(data) {
 		/*optional stuff to do after success */
 		console.log(data.words);
 		words=data.words;
 		// $('.word').text(data.words.shift().word);
-		showNextWord(data.words);
+		showNextWord(wordIndexNow);
 	});
 
 
@@ -15,8 +16,8 @@ $(function() {
 		$.post('api/word/disapear', {
 			word: word
 		}, function(data, textStatus, xhr) {
-			showNextWord();
-			console.log('fd');
+			showNextWord(wordIndexNow);
+			// console.log('fd');
 		});
 	});
 
@@ -27,7 +28,7 @@ $(function() {
 		$.post('api/word/remember', {
 			word: word
 		}, function(data, textStatus, xhr) {
-			showNextWord();
+			showNextWord(wordIndexNow);
 
 		});
 	});
@@ -38,11 +39,15 @@ $(function() {
 		$.post('api/word/forget', {
 			word: word
 		}, function(data, textStatus, xhr) {
-			showNextWord();
+			showNextWord(wordIndexNow);
 		});
 	});
+	$('.action__skip').on('click',function(e){
+		event.preventDefault();
+		showNextWord(wordIndexNow);
+	});
 
-	function showNextWord(){
-		$('.word').text(words.shift().word);
+	function showNextWord(wordIndexNow){
+		$('.word').text(words[wordIndexNow++].word);
 	}
 });
